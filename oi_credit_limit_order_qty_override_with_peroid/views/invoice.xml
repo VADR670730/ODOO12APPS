@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_id']" position="after">
+                    <field name="override_credit_limit" groups="oi_credit_limit_order_qty_override_with_peroid.group_credit_limit_override_ordered_qty"/>
+                </xpath>
+            </field>
+        </record>
+       
+    </data>
+</odoo>
