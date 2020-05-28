@@ -75,7 +75,8 @@ class Invoice(models.Model):
                 to_open_invoices.action_move_create()
                 return to_open_invoices.invoice_validate()
             if invoice_total > payment_total:
-                exceed_amount = (invoice_total + sale.amount_total) - payment_total
+                exceed_amount = (invoice_total + self.amount_total) - payment_total
+                print ("exc",exceed_amount)
             if ordered_quantity:
                 if self.partner_id.credit_limit and self.partner_id.credit_limit_applicable:
 

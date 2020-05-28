@@ -29,9 +29,9 @@ class SaleOrder(models.Model):
             sale_count = self.env['sale.order'].search([('partner_id','=', self.partner_id.id),('state','not in',['draft'])])
             cus_amount = self.amount_total
             print ("Customer Amount",cus_amount)
-            if self.partner_id.credit_limit and self.partner_id.credit_limit_applicable:
-                if cus_amount >= self.partner_id.credit_limit:
-                    raise UserError(_('Credit limit exceeded for this customer'))
+            # if self.partner_id.credit_limit and self.partner_id.credit_limit_applicable:
+            #     if cus_amount >= self.partner_id.credit_limit:
+            #         raise UserError(_('Credit limit exceeded for this customer'))
             # for pay in customer_payment:
             #     payment_total+= pay.amount
             if payment_total > invoice_total:
@@ -41,7 +41,12 @@ class SaleOrder(models.Model):
                     self.action_done()
             if invoice_total > payment_total:
                 exceed_amount = (invoice_total + self.amount_total) - payment_total
+                print ("exceed amount",exceed_amount)
+            if invoice_total==0 and payment_total==0:
+                exceed_amount = (invoice_total + self.amount_total) - payment_total
+                print ("exceed amount",exceed_amount)
             if ordered_quantity:
+
                 if exceed_amount > self.partner_id.credit_limit:
                     if self.credit_limit_checked == False:
                         return {

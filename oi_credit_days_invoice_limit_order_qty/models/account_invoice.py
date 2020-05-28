@@ -31,7 +31,7 @@ class Invoice(models.Model):
             return res
         if invoice_total > payment_total:
             exceed_amount = (invoice_total + sale.amount_total) - payment_total
-
+            print ("ex",exceed_amount)
         if exceed_amount > self.partner_id.credit_limit:
             raise UserError(_('Credit limit exceeded for this customer'))
         else:

@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='move_id']" position="after">
-                    <field name="override_credit_limit" groups="oi_credit_limit_order_qty_override.group_credit_limit_override_ordered_qty"/>
+                    <field name="override_credit_limit" groups="oi_credit_limit_days_invoice_order_qty_override.group_credit_limit_override_ordered_qty"/>
                 </xpath>
             </field>
         </record>
