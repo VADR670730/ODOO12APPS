@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='ref']" position="after">
-                    <field name="credit_limit_applicable" groups="oi_credit_limit_order_qty_with_invoice.group_credit_limit_applicable"/>
+                    <field name="credit_limit_applicable" groups="oi_credit_limit_order_qty.group_credit_limit_applicable"/>
                     <field name="credit_limit" attrs="{'invisible':[('credit_limit_applicable','=', False)]}"/>
                     
                 </xpath>

@@ -15,7 +15,7 @@ class SaleOrder(models.Model):
         exceed_amount = 0
         due = 0
 
-        if self.partner_id.credit_limit_applicable == True:
+        if self.partner_id.credit_limit_applicable == True and self.partner_id.credit_limit_applicable:
             ordered_quantity = all(line.product_id.invoice_policy == 'order' for line in self.order_line)
             if not ordered_quantity:
                 raise UserError(_('Select all products with Ordered quantities Invoicing policy'))
@@ -28,9 +28,9 @@ class SaleOrder(models.Model):
                 print ('payment_total',payment_total)
             cus_amount = self.amount_total
             print ("Customer Amount",cus_amount)
-            if self.partner_id.credit_limit:
-                if cus_amount >= self.partner_id.credit_limit:
-                    raise UserError(_('Credit limit exceeded for this customer'))
+            # if self.partner_id.credit_limit:
+            #     if cus_amount >= self.partner_id.credit_limit:
+            #         raise UserError(_('Credit limit exceeded for this customer'))
             
             if payment_total > invoice_total:
                 print ("else")
@@ -38,6 +38,8 @@ class SaleOrder(models.Model):
                 if self.env['ir.config_parameter'].sudo().get_param('sale.auto_done_setting'):
                     self.action_done()
             if invoice_total > payment_total:
+                exceed_amount = (invoice_total + self.amount_total) - payment_total
+            if invoice_total==0 and payment_total==0:
                 exceed_amount = (invoice_total + self.amount_total) - payment_total
             if ordered_quantity:
                 if exceed_amount > self.partner_id.credit_limit:
