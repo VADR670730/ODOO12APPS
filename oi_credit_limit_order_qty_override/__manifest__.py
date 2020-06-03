@@ -4,7 +4,7 @@
     "version": "12.0.1.0.0",
     "summary": "",
     "license": "OPL-1",
-    "depends": ["base","oi_credit_limit_order_qty_with_invoice","account"],
+    "depends": ["base","oi_credit_limit_order_qty","account"],
     "author": "Oodu Implementers Private Limited",
     "website": "https://www.odooimplementers.com",
     "category": "Account",

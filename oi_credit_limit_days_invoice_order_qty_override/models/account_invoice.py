@@ -82,7 +82,7 @@ class Invoice(models.Model):
                 else:
                     raise UserError(_('Select all products with Ordered quantities Invoicing policy'))
 
-            if self.partner_id.date_credit_limit and self.partner_id.date_credit_limit_applicable:
+            if self.partner_id.date_credit_limit and self.partner_id.date_credit_limit_applicable > 0:
                 if ordered_quantity:
                     if customer_invoices:
                         for rec in customer_invoices:
@@ -102,6 +102,16 @@ class Invoice(models.Model):
                             if invoice_expiry > self.partner_id.date_credit_limit:
                                 print ("UserError")
                                 raise UserError(_('Days limit exceeded for this customer'))
+                            else:
+                                print ("iiiiiiiiiiiiii")
+                                to_open_invoices = self.filtered(lambda inv: inv.state != 'open')
+                                if to_open_invoices.filtered(lambda inv: inv.state != 'draft'):
+                                    raise UserError(_("Invoice must be in draft state in order to validate it."))
+                                if to_open_invoices.filtered(lambda inv: inv.amount_total < 0):
+                                    raise UserError(_("You cannot validate an invoice with a negative total amount. You should create a credit note instead."))
+                                to_open_invoices.action_date_assign()
+                                to_open_invoices.action_move_create()
+                                return to_open_invoices.invoice_validate()
                     else:
                         to_open_invoices = self.filtered(lambda inv: inv.state != 'open')
                         if to_open_invoices.filtered(lambda inv: inv.state != 'draft'):
@@ -114,37 +124,41 @@ class Invoice(models.Model):
                 else:
                     raise UserError(_('Select all products with Ordered quantities Invoicing policy'))
 
-            if self.partner_id.invoice_credit_limit and self.partner_id.invoice_credit_limit_applicable:
+            if self.partner_id.invoice_credit_limit and self.partner_id.invoice_credit_limit_applicable > 0:
+                if ordered_quantity:
 
-                if customer_invoices:
-                    for record in customer_invoices:
-                        invoice_count = len(customer_invoices)
-                        invoice_count_total = self.partner_id.invoice_credit_limit
-                        print ("Invoice Count",invoice_count)
-                        if invoice_count_total:
-                            print ("Total Invoice", invoice_count)
-                            print ("Total Invoice Limit",invoice_count)
-                            if invoice_count >= invoice_count_total:
-                                print ("UserError")
-                                raise UserError(_('Invoice limit exceeded for this customer'))
-                            else:
-                                to_open_invoices = self.filtered(lambda inv: inv.state != 'open')
-                                if to_open_invoices.filtered(lambda inv: inv.state != 'draft'):
-                                    raise UserError(_("Invoice must be in draft state in order to validate it."))
-                                if to_open_invoices.filtered(lambda inv: inv.amount_total < 0):
-                                    raise UserError(_("You cannot validate an invoice with a negative total amount. You should create a credit note instead."))
-                                to_open_invoices.action_date_assign()
-                                to_open_invoices.action_move_create()
-                                return to_open_invoices.invoice_validate()
+                    if customer_invoices:
+                        for record in customer_invoices:
+                            invoice_count = len(customer_invoices)
+                            invoice_count_total = self.partner_id.invoice_credit_limit
+                            print ("Invoice Count",invoice_count)
+                            if invoice_count_total:
+                                print ("Total Invoice", invoice_count)
+                                print ("Total Invoice Limit",invoice_count)
+                                if invoice_count >= invoice_count_total:
+                                    print ("UserError")
+                                    raise UserError(_('Invoice limit exceeded for this customer'))
+                                else:
+                                    to_open_invoices = self.filtered(lambda inv: inv.state != 'open')
+                                    if to_open_invoices.filtered(lambda inv: inv.state != 'draft'):
+                                        raise UserError(_("Invoice must be in draft state in order to validate it."))
+                                    if to_open_invoices.filtered(lambda inv: inv.amount_total < 0):
+                                        raise UserError(_("You cannot validate an invoice with a negative total amount. You should create a credit note instead."))
+                                    to_open_invoices.action_date_assign()
+                                    to_open_invoices.action_move_create()
+                                    return to_open_invoices.invoice_validate()
+
+                    else:
+                        to_open_invoices = self.filtered(lambda inv: inv.state != 'open')
+                        if to_open_invoices.filtered(lambda inv: inv.state != 'draft'):
+                            raise UserError(_("Invoice must be in draft state in order to validate it."))
+                        if to_open_invoices.filtered(lambda inv: inv.amount_total < 0):
+                            raise UserError(_("You cannot validate an invoice with a negative total amount. You should create a credit note instead."))
+                        to_open_invoices.action_date_assign()
+                        to_open_invoices.action_move_create()
+                        return to_open_invoices.invoice_validate()
                 else:
-                    to_open_invoices = self.filtered(lambda inv: inv.state != 'open')
-                    if to_open_invoices.filtered(lambda inv: inv.state != 'draft'):
-                        raise UserError(_("Invoice must be in draft state in order to validate it."))
-                    if to_open_invoices.filtered(lambda inv: inv.amount_total < 0):
-                        raise UserError(_("You cannot validate an invoice with a negative total amount. You should create a credit note instead."))
-                    to_open_invoices.action_date_assign()
-                    to_open_invoices.action_move_create()
-                    return to_open_invoices.invoice_validate()
+                    raise UserError(_('Select all products with Ordered quantities Invoicing policy'))
                
             else:
                 to_open_invoices = self.filtered(lambda inv: inv.state != 'open')

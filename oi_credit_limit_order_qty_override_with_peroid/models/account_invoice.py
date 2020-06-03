@@ -80,7 +80,7 @@ class Invoice(models.Model):
                 else:
                     raise UserError(_('Select all products with Ordered quantities Invoicing policy'))
 
-            if self.partner_id.date_credit_limit and self.partner_id.date_credit_limit_applicable:
+            if self.partner_id.date_credit_limit and self.partner_id.date_credit_limit_applicable > 0:
                 if ordered_quantity:
                     if customer_invoices:
                         for rec in customer_invoices:
