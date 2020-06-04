@@ -54,9 +54,8 @@ class Invoice(models.Model):
                 if invoice_total > payment_total:
                     exceed_amount = (invoice_total + self.amount_total) - payment_total
                 if ordered_quantity:
-                    if self.partner_credit_limit and self.partner_id.credit_limit_applicable:
+                    if self.partner_id.credit_limit and self.partner_id.credit_limit_applicable:
                         if exceed_amount > self.partner_id.credit_limit:
-                            print (self.override_credit_limit, "self.override_credit_limit")
                             if self.override_credit_limit:
                                 to_open_invoices = self.filtered(lambda inv: inv.state != 'open')
                                 if to_open_invoices.filtered(lambda inv: inv.state != 'draft'):
