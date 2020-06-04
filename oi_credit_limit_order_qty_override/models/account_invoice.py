@@ -76,6 +76,15 @@ class Invoice(models.Model):
                             to_open_invoices.action_date_assign()
                             to_open_invoices.action_move_create()
                             return to_open_invoices.invoice_validate()
+                    else:
+                            to_open_invoices = self.filtered(lambda inv: inv.state != 'open')
+                            if to_open_invoices.filtered(lambda inv: inv.state != 'draft'):
+                                raise UserError(_("Invoice must be in draft state in order to validate it."))
+                            if to_open_invoices.filtered(lambda inv: inv.amount_total < 0):
+                                raise UserError(_("You cannot validate an invoice with a negative total amount. You should create a credit note instead."))
+                            to_open_invoices.action_date_assign()
+                            to_open_invoices.action_move_create()
+                            return to_open_invoices.invoice_validate()
                 else:
                     raise UserError(_('Select all products with Ordered quantities Invoicing policy'))
             else:

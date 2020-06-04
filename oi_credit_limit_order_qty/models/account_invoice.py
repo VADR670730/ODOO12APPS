@@ -20,7 +20,6 @@ class Invoice(models.Model):
         for inv in customer_inv:
             invoice_total+= inv.amount_total
             due += inv.residual
-            print ('invoice_total',invoice_total, due, inv.invoice_payment_state)
             payment_total = invoice_total - due
             print ('payment_total',payment_total)
         sale = self.env['sale.order'].search([('name','=',self.origin)])
