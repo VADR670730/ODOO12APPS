@@ -13,8 +13,8 @@ class Picking(models.Model):
         invoice_total = 0
         payment_total = 0
         exceed_amount = 0
-        # sale_total = 0
-        # cus_sale_amount = 0
+        sale_total = 0
+        cus_sale_amount = 0
         due = 0
 
         customer_inv = self.env["account.invoice"].search([('partner_id','=', self.partner_id.id), ('state','not in',['draft','cancel']),('type', '=','out_invoice')])
