@@ -33,7 +33,7 @@ class SaleOrder(models.Model):
             #     if cus_amount >= self.partner_id.credit_limit:
             #         raise UserError(_('Credit limit exceeded for this customer'))
             if payment_total > invoice_total:
-                print ("else")self._action_confirm()
+                self._action_confirm()
                 if self.env['ir.config_parameter'].sudo().get_param('sale.auto_done_setting'):
                     self.action_done()
             if invoice_total > payment_total:
