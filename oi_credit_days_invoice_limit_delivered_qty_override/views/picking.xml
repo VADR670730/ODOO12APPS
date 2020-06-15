@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='extra']/group/group/field[@name='priority']" position="after">
-                    <field name="override_credit_limit" groups="oi_credit_limit_delivered_qty_override.group_credit_limit_override_delivered_qty" attrs="{'invisible': [('picking_type_code', '=', 'incoming')]}"/>
+                    <field name="override_credit_limit" groups="oi_credit_days_invoice_limit_delivered_qty_override.group_credit_limit_override_delivered_qty" attrs="{'invisible': [('picking_type_code', '=', 'incoming')]}"/>
                 </xpath>
             </field>
         </record>
