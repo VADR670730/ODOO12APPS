@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Delivered Quantity Credit Limit Override -->
+        <record id="group_credit_limit_override_delivered_qty" model="res.groups">
+            <field name="name">Credit Limit Override - Delivered Quantity</field>
+        </record>
+    </data>
+</odoo>
