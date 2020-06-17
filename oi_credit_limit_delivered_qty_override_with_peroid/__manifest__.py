@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 {
-    "name": "Customer Credit Limit - Delivered Quantity(Override)",
+    "name": "Customer Credit Limit with period- Delivered Quantity(Override)",
     "version": "12.0.1.0.0",
     "summary": "",
     "license": "OPL-1",
