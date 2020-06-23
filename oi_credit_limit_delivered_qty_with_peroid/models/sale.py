@@ -39,7 +39,6 @@ class SaleOrder(models.Model):
             if invoice_total==0 and payment_total==0:
                 exceed_amount = (invoice_total + self.amount_total) - payment_total
             if not delivered_quantity:
-                print ("ppppp")
                 raise UserError(_('Please select delivered quantities as invoicing policy'))
             if delivered_quantity:
                 if exceed_amount > self.partner_id.credit_limit:

@@ -34,7 +34,6 @@ class Picking(models.Model):
         for sales_cou in sale:
             sale_total+= sales_cou.amount_total
             cus_sale_amount = sale_total - payment_total
-            print ("Amountttttttt",cus_sale_amount,sale_total)
             if not self.override_credit_limit and self.partner_id.credit_limit > 0 and self.partner_id.credit_limit_applicable ==True: 
                 if cus_sale_amount > self.partner_id.credit_limit:
                     raise UserError(_('Credit limit exceeded for this customer'))
