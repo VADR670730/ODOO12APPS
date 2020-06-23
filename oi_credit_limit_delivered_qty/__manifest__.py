@@ -4,7 +4,7 @@
     "version": "12.0.1.0.0",
     "summary": "",
     "license": "OPL-1",
-    "depends": ["base", "sale", "stock","oi_credit_limit_delivered_qty_override"],
+    "depends": ["base", "sale", "stock"],
     "author": "Oodu Implementers Private Limited",
     "website": "https://www.odooimplementers.com",
     "category": "Sale & Stock",
