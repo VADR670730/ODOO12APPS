@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_level_one" model="res.groups">
+            <field name="name">Level One User</field>
+        </record>
+        <record id="group_level_two" model="res.groups">
+            <field name="name">Level Two User</field>
+        </record>
+        <record id="group_no_approval_restrictions" model="res.groups">
+            <field name="name">No Approval Restrictions</field>
+        </record>
+</data>
+</odoo>

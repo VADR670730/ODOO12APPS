@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+
+     <record id="sale_order_form_inherits" model="ir.ui.view">
+            <field name="name">sale.order.form.inherits</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_cancel']" position="before">
+                    <button name="to_approval" type="object" states='to approve' string="To Approve" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="replace">
+                    <button name="action_cancel" states="draft,sent,sale,to approve" type="object" string="Cancel"/>
+                </xpath>
+                <field name="partner_id" position="after">
+                    <field name="level_one_id" options='{"no_open": True, "no_create": True}'/>
+                </field>
+            </field>
+      </record>
+
+
+</odoo>
