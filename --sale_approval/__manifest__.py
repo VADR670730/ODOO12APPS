@@ -23,7 +23,7 @@
 
 {
     'name': 'Sales order Approval',
-    'version': '12.0.1.0.0',
+    'version': '13.0.1.0.0',
     'category': 'sales',
     'summary': 'In the sale order form of the total amount value consider in sale approval seetings of the minimum and maximum values based on approval to allocated to the perticular level users.',
     'author': 'Oodu Implementers Private Limited',

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_so_no_approval_restrictions" model="res.groups">
+            <field name="name">SO No Approval Restrictions</field>
+        </record>
+    </data>
+</odoo>
