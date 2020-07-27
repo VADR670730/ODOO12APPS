@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<record model="ir.actions.server" id="payslip_bulk_approval_action">
+            <field name="name">Bulk Approval For Payslip</field>
+            <field name="model_id" ref="payslip_bulk_approval.model_hr_payslip"/>
+            <field name="binding_model_id" ref="payslip_bulk_approval.model_hr_payslip" />
+            <field name="state">code</field>
+            <field name="code">
+                records.action_approve()
+            </field>
+        </record>
+	</data>
+</odoo>

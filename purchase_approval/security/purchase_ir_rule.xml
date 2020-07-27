@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <data noupdate="1">-->
+<!--        <record id="rules_id" model="ir.rule">-->
+<!--            <field name="name">purchase order User level</field>-->
+<!--            <field name="model_id" ref="model_purchase_order"/>-->
+<!--            <field name="domain_force">[('user_id','=',user.id)]</field>-->
+<!--            <field name="groups" eval="[(4,ref('purchase_approval.group_level_one'))]"/>-->
+<!--         </record>-->
+
+<!--    </data>-->
+</odoo>

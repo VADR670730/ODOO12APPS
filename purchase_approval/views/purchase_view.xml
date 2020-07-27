@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherits" model="ir.ui.view">
+            <field name="name">Res Config Settings View Form Inherits</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='purchase_setting_container']/div[1]" position="replace">
+                </xpath>
+            </field>
+    </record>
+
+
+     <record id="purchase_order_form_inherits" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherits</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_approve']" position="replace">
+                    <button name="button_approves" type="object" states='to approve' string="Approve Order One" class="oe_highlight" groups="purchase_approval.group_level_one"/>
+                </xpath>
+                <xpath expr="//button[@name='button_approves']" position="after">
+                    <button name="button_approve" type="object" states='to approve two' string="To Approve two" class="oe_highlight" groups="purchase_approval.group_level_two"/>
+                </xpath>
+                <field name="date_approve" position="after">
+                    <field name="level_one_id" options='{"no_open": True, "no_create": True}'/>
+                    <field name="level_two_id" options='{"no_open": True, "no_create": True}'/>
+                </field>
+            </field>
+      </record>
+
+
+</odoo>
