@@ -33,7 +33,6 @@ class SaleOrderInherits(models.Model):
         if self.level_one_id:
             if self.env.user.name == self.level_one_id.name:
                 self.write({'state': 'sale', 'date_order': fields.Datetime.now()})
-                self._action_confirm()
             else:
                 raise UserError('You’re not allocated as Approval User for this SO.')
         return {}
