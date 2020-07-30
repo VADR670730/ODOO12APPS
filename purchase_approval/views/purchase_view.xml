@@ -22,7 +22,7 @@
                 <xpath expr="//button[@name='button_approves']" position="after">
                     <button name="button_approve" type="object" states='to approve two' string="To Approve two" class="oe_highlight" groups="purchase_approval.group_level_two"/>
                 </xpath>
-                <field name="date_approve" position="after">
+                <field name="date_order" position="after">
                     <field name="level_one_id" options='{"no_open": True, "no_create": True}'/>
                     <field name="level_two_id" options='{"no_open": True, "no_create": True}'/>
                 </field>

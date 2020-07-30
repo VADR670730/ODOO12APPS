@@ -52,7 +52,6 @@ class SaleOrderInherits(models.Model):
                 'state': 'sale',
                 'date_order': fields.Datetime.now()
             })
-            self._action_confirm()
 
 
         if not self.user_has_groups('sale_approval.group_so_no_approval_restrictions'):

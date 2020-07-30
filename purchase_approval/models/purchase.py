@@ -57,12 +57,13 @@ class PurchaseOrderInherits(models.Model):
 
     @api.onchange('amount_total')
     def amount_total_onchange(self):
-        if self.amount_total:
+        if self.amount_total >= 0:
             max = self.env['purchase.approval.settings'].search([('minimum_total_amount', '<=', self.amount_total),
                                                                  ('maximum_total_amount', '>=', self.amount_total),
                                                                  ('approval_currency_id.name', '=', self.currency_id.name)])
-            self.level_one_id = max.level_one_id
-            self.level_two_id = max.level_two_id
+            if max.minimum_total_amount >= 0:
+                self.level_one_id = max.level_one_id
+                self.level_two_id = max.level_two_id
 
     def button_confirm(self):
         for order in self:
